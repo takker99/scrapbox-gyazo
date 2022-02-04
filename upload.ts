@@ -10,6 +10,7 @@ export interface UploadInit {
   /** Gyazoのaccess token */ token: string;
   /** metadataを公開するかどうか 既定で非公開 */ metadataIsPublic?: boolean;
   /** 追加先Gyazo collectionのID */ collectionId?: string;
+  /** 画像に関連付けられたURL */ refererURL?: string | URL;
 }
 /** Gyazoへのupload結果 */
 export interface UploadResult {
@@ -35,12 +36,14 @@ export async function upload(
     description,
     metadataIsPublic,
     collectionId,
+    refererURL,
     created = Math.round(new Date().getTime() / 1000),
   } = init;
   const formData = new FormData();
   formData.append("imagedata", image);
   formData.append("access_token", token);
   formData.append("referer_url", location.href);
+  if (refererURL) formData.append("referer_url", refererURL.toString());
   if (title) formData.append("title", title);
   if (description) formData.append("desc", description);
   if (collectionId) formData.append("collection_id", collectionId);
