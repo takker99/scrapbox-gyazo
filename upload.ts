@@ -61,5 +61,5 @@ export async function upload(
     return { ok: false, ...error };
   }
 
-  return await res.json();
+  return { ok: true, ...(await res.json()) };
 }
