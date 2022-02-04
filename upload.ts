@@ -42,7 +42,6 @@ export async function upload(
   const formData = new FormData();
   formData.append("imagedata", image);
   formData.append("access_token", token);
-  formData.append("referer_url", location.href);
   if (refererURL) formData.append("referer_url", refererURL.toString());
   if (title) formData.append("title", title);
   if (description) formData.append("desc", description);
